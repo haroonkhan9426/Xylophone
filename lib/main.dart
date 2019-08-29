@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audio_cache.dart';
 
 void main() => runApp(XylophoneApp());
 
@@ -18,63 +19,30 @@ class XylophoneApp extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        Expanded(
-          flex: 1,
-          child: FlatButton(
-            onPressed: () {},
-            child: Text(' '),
-            color: Colors.red,
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: FlatButton(
-            onPressed: () {}, child: Text(' '),
-            color: Colors.pink,
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: FlatButton(
-            onPressed: () {},
-            child: Text(' '),
-            color: Colors.purple,
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: FlatButton(
-            onPressed: () {},
-            child: Text(' '),
-            color: Colors.blue,
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: FlatButton(
-            onPressed: () {},
-            child: Text(' '),
-            color: Colors.green,
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: FlatButton(
-            onPressed: () {},
-            child: Text(' '),
-            color: Colors.yellow,
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: FlatButton(
-            onPressed: () {},
-            child: Text(' '),
-            color: Colors.brown,
-          ),
-        ),
-
-      ],
+        _renderButton(Colors.red, 1),
+        _renderButton(Colors.purple, 2),
+        _renderButton(Colors.green, 3),
+        _renderButton(Colors.blue, 4),
+        _renderButton(Colors.brown, 5),
+        _renderButton(Colors.yellow, 6),
+        _renderButton(Colors.cyan, 7),
+        ]
     );
+  }
+
+  Widget _renderButton(Color color, int soundNum){
+    return Expanded(
+      child: FlatButton(
+        onPressed: () {
+          _playSound(soundNum);
+        },
+        color: color,
+      ),
+    );
+  }
+
+  _playSound(int soundNumber){
+    final player = AudioCache();
+    player.play('note$soundNumber.wav');
   }
 }
